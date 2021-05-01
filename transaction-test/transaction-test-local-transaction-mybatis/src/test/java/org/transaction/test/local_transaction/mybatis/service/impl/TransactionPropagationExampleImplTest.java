@@ -85,10 +85,10 @@ public class TransactionPropagationExampleImplTest {
 	 * 结果：张三（插入），李四（插入）。</br>
 	 * 外围方法没有事务，插入“张三”、“李四”方法在自己的事务中独立运行，外围方法异常不影响内部插入“张三”、“李四”方法独立的事务。
 	 */
-	@Test
-	public void testNotransaction_exception_required_required() {
-		transactionPropagationExample.notransaction_exception_required_required();
-	}
+//	@Test
+//	public void testNotransaction_exception_required_required() {
+//		transactionPropagationExample.notransaction_exception_required_required();
+//	}
 
 	/**
 	 * 结果：张三（插入），李四（未插入）</br>
@@ -96,30 +96,30 @@ public class TransactionPropagationExampleImplTest {
 	 * 方法不受影响。
 	 * 
 	 */
-	@Test
-	public void testNotransaction_required_required_exception() {
-		transactionPropagationExample.notransaction_required_required_exception();
-	}
+//	@Test
+//	public void testNotransaction_required_required_exception() {
+//		transactionPropagationExample.notransaction_required_required_exception();
+//	}
 
 	/**
 	 * 结果：张三（未插入），李四（未插入）</br>
 	 * 外围方法开启事务，插入“张三”、“李四”方法都在外围方法的事务中运行，加入外围方法事务，所以三个方法同一个事务。外围方法或内部方法抛出异常，
 	 * 整个事务全部回滚。
 	 */
-	@Test
-	public void testTransaction_exception_required_required() {
-		transactionPropagationExample.transaction_exception_required_required();
-	}
+//	@Test
+//	public void testTransaction_exception_required_required() {
+//		transactionPropagationExample.transaction_exception_required_required();
+//	}
 
 	/**
 	 * 结果：张三（未插入），李四（未插入）</br>
 	 * 外围方法开启事务，插入“张三”、“李四”方法都在外围方法的事务中运行，加入外围方法事务，所以三个方法同一个事务。外围方法或内部方法抛出异常，
 	 * 整个事务全部回滚。
 	 */
-	@Test
-	public void testTransaction_required_required_exception() {
-		transactionPropagationExample.transaction_required_required_exception();
-	}
+//	@Test
+//	public void testTransaction_required_required_exception() {
+//		transactionPropagationExample.transaction_required_required_exception();
+//	}
 	
 	
 	
@@ -129,10 +129,10 @@ public class TransactionPropagationExampleImplTest {
 	 * 外围方法开启事务，插入“张三”、“李四”方法都在外围方法的事务中运行，加入外围方法事务，所以三个方法同一个事务。外围方法或内部方法抛出异常，
 	 * 整个事务全部回滚。虽然我们catch了插入“李四”方法的异常，使异常不会被外围方法感知，但是插入“李四”方法事务被回滚，内部方法外围方法一个事务，所以整体事务被回滚了。
 	 */
-	@Test
-	public void testTransaction_required_required_exception_try() {
-		transactionPropagationExample.transaction_required_required_exception_try();
-	}
+//	@Test
+//	public void testTransaction_required_required_exception_try() {
+//		transactionPropagationExample.transaction_required_required_exception_try();
+//	}
 
 	/**
 	 * 结果：张三（插入），李四（插入）</br>
@@ -177,6 +177,10 @@ public class TransactionPropagationExampleImplTest {
 	// 当外围方法不支持事务，REQUIRED开启新的事务而SUPPORTS不开启事务。
 	// REQUIRED的事务一定和外围方法事务统一。如果外围方法没有事务，每一个内部REQUIRED方法都会开启一个新的事务，互不干扰。
 	// ---------------------------------------------------------------------------------
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 	/**
 	 * 结果：张三（插入），李四（插入）</br>
@@ -226,13 +230,14 @@ public class TransactionPropagationExampleImplTest {
 	public void testTransaction_required_requiresNew_requiresNew_exception_try() {
 		transactionPropagationExample.transaction_required_requiresNew_requiresNew_exception_try();
 	}
-
-	
-	
 	// ---------------------------------------------------------------------------------
 	// REQUIRES_NEW标注方法无论外围方法是否开启事务，内部REQUIRES_NEW方法均会开启独立事务，且和外围方法也不在同一个事务中，内部方法和外围方法、内部方法之间均不相互干扰。
 	// 当外围方法不开启事务的时候，REQUIRED和REQUIRES_NEW标注的内部方法效果相同。
 	// ---------------------------------------------------------------------------------
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 
 	/**
 	 * 结果：张三（插入），李四（插入）</br>
@@ -315,7 +320,11 @@ public class TransactionPropagationExampleImplTest {
 	public void testTransaction_mandatory_mandatory_exception() {
 		transactionPropagationExample.transaction_mandatory_mandatory_exception();
 	}
-	
+
+	// ----------------------------------------------------------------
+	// PROPAGATION_MANDATORY	使用当前的事务，如果当前没有事务，就抛出异常。
+	// ----------------------------------------------------------------
+
 	
 	/**
 	 * 结果：张三（未插入</br>
@@ -345,7 +354,8 @@ public class TransactionPropagationExampleImplTest {
 	public void testNotransaction_never_never_exception() {
 		transactionPropagationExample.notransaction_never_never_exception();
 	}
-	
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/**
 	 * 结果：张三（未插入），李四（未插入）</br>
@@ -392,8 +402,7 @@ public class TransactionPropagationExampleImplTest {
 	//------------------------------------------
 	//在外围方法不开启事务的时候，NESTED和REQUIRED行为类似，均开新开事务。
 	//------------------------------------------
-	
-	
+
 	/**
 	 * 结果：张三（插入），李四（未插入）</br>
 	 * 外围方法开启事务，插入“张三”方法和插入“李四”方法为外围方法的子事务，插入“李四”方法抛出异常，相应的子事务回滚，异常被捕获外围方法不可知，故外围方法事务无需回滚。
@@ -405,13 +414,14 @@ public class TransactionPropagationExampleImplTest {
 	}
 	
 	//------------------------------------------------------------------------------
-	//NESTED和REQUIRED修饰的内部方法都属于外围方法事务，如果外围方法抛出异常，这两种方法的事务都会被回滚。
-	//但是REQUIRED是加入外围方法事务，所以和外围事务同属于一个事务，所以一旦REQUIRED事务抛出异常被回滚，外围方法事务也将被回滚。{@link testTransaction_required_required_exception_try}
-	//而NESTED是外围方法的子事务，有单独的保存点，所以NESTED方法抛出异常被回滚，不会影响到外围方法的事务。{@link testTransaction_nested_nested_exception_try}
-	
-	//NESTED和REQUIRES_NEW都可以做到内部方法事务回滚但是不影响外围方法事务。{@link testTransaction_required_requiresNew_requiresNew_exception_try}
-	//但是因为NESTED是嵌套事务，所以外围方法回滚之后，作为外围方法事务的子事务也会被回滚。{@link testTransaction_exception_nested_nested}
-	//而REQUIRES_NEW是通过开启新的事务实现的，内部事务和外围事务是两个事务，外围事务回滚不会影响内部事务。{@link testTransaction_exception_required_requiresNew_requiresNew}
+	/**
+	 * NESTED 和 REQUIRED 修饰的内部方法都属于外围方法事务，如果外围方法抛出异常，这两种方法的事务都会被回滚。
+	 * 但是 REQUIRED 是加入外围方法事务，所以和外围事务同属于一个事务，所以一旦 REQUIRED 事务抛出异常被回滚，外围方法事务也将被回滚。{@link #testTransaction_required_required_exception_try}
+	 * 而 NESTED 是外围方法的子事务，有单独的保存点，所以 NESTED 方法抛出异常被回滚，不会影响到外围方法的事务。{@link #testTransaction_nested_nested_exception_try}
+	 * NESTED 和 REQUIRES_NEW 都可以做到内部方法事务回滚但是不影响外围方法事务。{@link #testTransaction_required_requiresNew_requiresNew_exception_try}
+	 * 但是因为 NESTED 是嵌套事务，所以外围方法回滚之后，作为外围方法事务的子事务也会被回滚。{@link #testTransaction_exception_nested_nested}
+	 * 而 REQUIRES_NEW 是通过开启新的事务实现的，内部事务和外围事务是两个事务，外围事务回滚不会影响内部事务。{@link #testTransaction_exception_required_requiresNew_requiresNew}
+	 */
 	//------------------------------------------------------------------------------
 	
 	
