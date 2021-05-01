@@ -484,8 +484,6 @@ public class TransactionPropagationExampleImplTest {
 	//对于REQUIREED和NESTED传播属性,无论外围方法是否开启事务,均可见外围方法执行结果。
 	//------------------------------------------------------------------------------
 	
-	
-
 
 	
 }
